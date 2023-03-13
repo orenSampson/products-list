@@ -1,4 +1,4 @@
-class Product {
+export class Product {
   id: number;
   name: string;
   description: string;
@@ -14,4 +14,6 @@ class Product {
   }
 }
 
-export default Product;
+export type RemoveFunction = (productID: number) => void;
+
+export type PropsWithChildren<P> = P & { children?: React.ReactNode };

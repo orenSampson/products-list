@@ -1,16 +1,18 @@
 import React from 'react';
 
-import Product from '../models/product';
+import { Product, PropsWithChildren, RemoveFunction } from '../models/product';
 
 interface ProductsContextObj {
   products: Product[];
+  removeProduct: RemoveFunction;
 }
 
-const ProductsContext = React.createContext<ProductsContextObj>({
+export const ProductsContext = React.createContext<ProductsContextObj>({
   products: [],
+  removeProduct: (productID: number) => {},
 });
 
-const ProductsContextProvider: React.FC<PropsChildren> = (props) => {
+const ProductsContextProvider: React.FC<PropsWithChildren<{}>> = (props) => {
   const [products, setProducts] = React.useState<Product[]>([
     new Product('Magazine', 'A beautiful magazine', 100, new Date()),
     new Product('Toothpaste', 'A tooth whitener', 5, new Date('2015-03-25')),
@@ -19,9 +21,19 @@ const ProductsContextProvider: React.FC<PropsChildren> = (props) => {
     new Product('shampoo', 'head and shoulders shampoo', 7, new Date('2020-07-09')),
   ]);
 
+  const removeProductHandler = (productID: number) => {
+    console.log('productID :>> ', productID);
+    setProducts((prevProducts) => {
+      return prevProducts.filter((product) => product.id !== productID);
+    });
+  };
+
   const contextValue: ProductsContextObj = {
     products,
+    removeProduct: removeProductHandler,
   };
 
   return <ProductsContext.Provider value={contextValue}>{props.children}</ProductsContext.Provider>;
 };
+
+export default ProductsContextProvider;
