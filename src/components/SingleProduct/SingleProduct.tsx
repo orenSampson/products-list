@@ -13,9 +13,10 @@ const SingleProduct: React.FC<{
   return (
     <div className={classes['single-product']} onClick={clickHandler}>
       <img className={classes['img-size']} src={props.product.imageURL} alt="" />
-      <p>
-        {props.product.id} {props.product.name}
-      </p>
+      <p>name: {props.product.name}</p>
+      <p>description: {props.product.description}</p>
+      <p>price: {props.product.price}$</p>
+
       <button onClick={props.removeProductFunc.bind(null, props.product.id)}>remove</button>
     </div>
   );

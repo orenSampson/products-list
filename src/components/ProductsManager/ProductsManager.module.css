@@ -1,0 +1,8 @@
+.general-display {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.products-displayer {
+  width: 49%;
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 // import './App.css';
-import ProdcutsManager from './components/ProdcutsManager/ProdcutsManager';
+import ProductsManager from './components/ProductsManager/ProductsManager';
 
 function App() {
   return (
     <div className="App">
-      <ProdcutsManager />
+      <ProductsManager />
     </div>
   );
 }

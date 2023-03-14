@@ -4,8 +4,9 @@ import { ProductsContext } from '../../store/products-context';
 import ProductsDisplayer from '../ProductsDisplayer/ProductsDisplayer';
 import EditProduct from '../EditProduct/EditProduct';
 import { Product } from '../../models/product';
+import classes from './ProductsManager.module.css';
 
-const ProdcutsManager: React.FC = () => {
+const ProductsManager: React.FC = () => {
   const [editAreaMode, setEditAreaMode] = useState('');
   const [editAreaPayload, setEditAreaPayload] = useState<Product>(new Product('a', 'a', 1, ''));
   const productsCtx = useContext(ProductsContext);
@@ -34,23 +35,28 @@ const ProdcutsManager: React.FC = () => {
       <div>
         <button onClick={changeModeToAddModeHandler}>Add</button>
       </div>
-      <ProductsDisplayer
-        products={productsList}
-        removeProductFunc={removeProductFunc}
-        editProductFunc={changeModeToEditModeHandler}
-      />
-      ;
-      {editAreaMode !== '' && (
-        <EditProduct
-          mode={editAreaMode}
-          product={editAreaPayload}
-          addProductFunc={addProductFunc}
-          closeEditForm={changeModeToEmptyModeHandler}
-          editProductFunc={editProductFunc}
-        />
-      )}
+      <div className={classes['general-display']}>
+        <div className={classes['products-displayer']}>
+          <ProductsDisplayer
+            products={productsList}
+            removeProductFunc={removeProductFunc}
+            editProductFunc={changeModeToEditModeHandler}
+          />
+        </div>
+        <div className={classes['products-displayer']}>
+          {editAreaMode !== '' && (
+            <EditProduct
+              mode={editAreaMode}
+              product={editAreaPayload}
+              addProductFunc={addProductFunc}
+              closeEditForm={changeModeToEmptyModeHandler}
+              editProductFunc={editProductFunc}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ProdcutsManager;
+export default ProductsManager;
