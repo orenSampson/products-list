@@ -78,12 +78,18 @@ const EditProduct: React.FC<{
   useEffect(() => {
     console.log('props.mode :>> ', props.mode);
     if (props.mode === 'edit') {
-      nameChangeHandler({ target: { value: props.product?.name } }); //event.target.value
-      descriptionChangeHandler({ target: { value: props.product?.description } }); //event.target.value
-      priceChangeHandler({ target: { value: props.product?.price } }); //event.target.value
-      imageURLChangeHandler({ target: { value: props.product?.imageURL } }); //event.target.value
+      nameChangeHandler({ target: { value: props.product?.name } });
+      descriptionChangeHandler({ target: { value: props.product?.description } });
+      priceChangeHandler({ target: { value: props.product?.price } });
+      imageURLChangeHandler({ target: { value: props.product?.imageURL } });
     }
-  }, [props.product]);
+    if (props.mode === 'add') {
+      nameChangeHandler({ target: { value: '' } });
+      descriptionChangeHandler({ target: { value: '' } });
+      priceChangeHandler({ target: { value: '' } });
+      imageURLChangeHandler({ target: { value: '' } });
+    }
+  }, [props.mode, props.product]);
 
   let formIsValid = false;
 
@@ -100,7 +106,6 @@ const EditProduct: React.FC<{
 
     if (props.mode === 'add') {
       props.addProductFunc(nameValue, descriptionValue, priceValue, imageURLValue);
-      props.closeEditForm();
     }
 
     if (props.mode === 'edit') {
@@ -111,13 +116,9 @@ const EditProduct: React.FC<{
         priceValue,
         imageURLValue
       );
-      props.closeEditForm();
     }
 
-    // resetname();
-    // resetDescription();
-    // resetPrice();
-    // resetImageURL();
+    props.closeEditForm();
   };
 
   const nameClasses = nameHasError ? 'form-control invalid' : 'form-control';
