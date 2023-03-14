@@ -1,0 +1,12 @@
+.single-product {
+  border: 1px solid black;
+  margin: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.single-product img {
+  width: 10rem;
+  height: 10rem;
+}

@@ -1,12 +1,22 @@
-import { Product, RemoveFunction } from '../../models/product';
+import { Product, RemoveFunction, EditFunction } from '../../models/product';
+import classes from './SingleProduct.module.css';
 
-const SingleProduct: React.FC<{ product: Product; removeProduct: RemoveFunction }> = (props) => {
+const SingleProduct: React.FC<{
+  product: Product;
+  removeProductFunc: RemoveFunction;
+  editProductFunc: (product: Product) => void;
+}> = (props) => {
+  const clickHandler = () => {
+    props.editProductFunc(props.product);
+  };
+
   return (
-    <div>
-      <li>
+    <div className={classes['single-product']} onClick={clickHandler}>
+      <img className={classes['img-size']} src={props.product.imageURL} alt="" />
+      <p>
         {props.product.id} {props.product.name}
-      </li>
-      <button onClick={props.removeProduct.bind(null, props.product.id)}>remove</button>
+      </p>
+      <button onClick={props.removeProductFunc.bind(null, props.product.id)}>remove</button>
     </div>
   );
 };
